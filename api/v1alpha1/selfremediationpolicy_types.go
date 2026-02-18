@@ -135,6 +135,24 @@ type GrafanaIntegration struct {
 	WebhookURL string `json:"webhookUrl,omitempty"`
 }
 
+// DiscordIntegration defines optional Discord integration for notifications
+type DiscordIntegration struct {
+	// Whether Discord integration is enabled
+	Enabled bool `json:"enabled"`
+
+	// Webhook URL for Discord notifications
+	// +optional
+	WebhookURL string `json:"webhookUrl,omitempty"`
+
+	// ChannelName to mention in the notification
+	// +optional
+	ChannelName string `json:"channelName,omitempty"`
+
+	// NotifyOnActions send notifications when remediation actions are taken
+	// +optional
+	NotifyOnActions bool `json:"notifyOnActions,omitempty"`
+}
+
 // SelfRemediationPolicySpec defines the desired state
 type SelfRemediationPolicySpec struct {
 	// TargetRef specifies the target resource to monitor
@@ -153,6 +171,10 @@ type SelfRemediationPolicySpec struct {
 	// GrafanaIntegration configuration
 	// +optional
 	GrafanaIntegration *GrafanaIntegration `json:"grafanaIntegration,omitempty"`
+
+	// DiscordIntegration configuration for Discord notifications
+	// +optional
+	DiscordIntegration *DiscordIntegration `json:"discordIntegration,omitempty"`
 }
 
 // TargetReference contains the reference to the target resource
